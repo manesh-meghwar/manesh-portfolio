@@ -1,0 +1,5 @@
+Place your introduction video in this folder and name it:
+
+introduction-video.mp4
+
+The Résumé page will detect and display it automatically.

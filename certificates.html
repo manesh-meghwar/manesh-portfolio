@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Certificates | Manesh Kumar</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"><link href="css/style.css" rel="stylesheet">
+  <style>
+    .portfolio-pagination .page-link{background:#111a1a;border-color:rgba(193,255,229,.14);color:#94a3a2;min-width:42px;text-align:center}
+    .portfolio-pagination .page-link:hover,.portfolio-pagination .page-item.active .page-link{background:#70f5c1;border-color:#70f5c1;color:#071010}
+    .portfolio-pagination .page-item.disabled .page-link{background:#0b1414;border-color:rgba(193,255,229,.08);color:#4f6260}
+    .certificate-item{height:100%}
+    .certificate-entry{display:flex;flex-direction:column;height:100%;overflow:hidden;border:1px solid rgba(193,255,229,.14);background:linear-gradient(145deg,rgba(22,34,33,.95),rgba(12,22,21,.9));transition:transform .25s ease,border-color .25s ease,box-shadow .25s ease}
+    .certificate-entry:hover{transform:translateY(-4px);border-color:rgba(112,245,193,.55);box-shadow:0 20px 45px rgba(0,0,0,.22)}
+    .certificate-preview{position:relative;width:100%;aspect-ratio:16/10;padding:0;overflow:hidden;border:0;border-bottom:1px solid rgba(193,255,229,.14);background:#0b1414;cursor:zoom-in}
+    .certificate-preview img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .35s ease,filter .35s ease}
+    .certificate-preview:hover img{transform:scale(1.025);filter:brightness(.82)}
+    .certificate-pdf-preview{position:absolute;inset:0;display:grid;place-content:center;gap:.65rem;text-align:center;color:#94a3a2;background:radial-gradient(circle at center,rgba(112,245,193,.1),transparent 58%),#0b1414}
+    .certificate-pdf-preview i{color:#70f5c1;font-size:3rem}
+    .certificate-pdf-preview strong{color:#eef4f2;font-size:.85rem}
+    .certificate-pdf-preview small{font:9px monospace;letter-spacing:.1em;text-transform:uppercase}
+    .certificate-zoom{position:absolute;right:14px;bottom:14px;width:38px;height:38px;display:grid;place-items:center;border:1px solid rgba(112,245,193,.45);background:rgba(7,16,16,.88);color:#70f5c1}
+    .certificate-image-fallback{display:none;position:absolute;inset:0;place-content:center;text-align:center;padding:1.5rem;color:#6f8580;background:radial-gradient(circle at center,rgba(112,245,193,.08),transparent 55%),#0b1414}
+    .certificate-image-fallback i{display:block;margin-bottom:.65rem;color:#70f5c1;font-size:2rem}
+    .certificate-image-fallback small{font:9px monospace;letter-spacing:.1em;text-transform:uppercase}
+    .image-missing img,.image-missing .certificate-zoom{display:none}
+    .image-missing .certificate-image-fallback{display:grid}
+    .certificate-copy{display:flex;flex:0 0 240px;flex-direction:column;width:100%;height:240px;min-height:240px;max-height:240px;padding:1.35rem;overflow:hidden}
+    .certificate-meta{min-height:2.5em;margin-bottom:.55rem;color:#70f5c1;font:9px monospace;letter-spacing:.12em;text-transform:uppercase}
+    .certificate-copy h2{min-height:2.6em;margin-bottom:.6rem;font-size:1.08rem;line-height:1.3}
+    .certificate-copy .certificate-description{display:block;flex:0 0 105px;width:100%;height:105px;min-height:105px;max-height:105px;margin:0!important;padding:0 .7rem 0 0!important;overflow-x:hidden!important;overflow-y:auto!important;overscroll-behavior:contain;touch-action:pan-y;color:#94a3a2;font-size:.82rem;line-height:1.65;scrollbar-width:thin;scrollbar-color:#70f5c1 rgba(193,255,229,.08)}
+    .certificate-description::-webkit-scrollbar{width:6px}
+    .certificate-description::-webkit-scrollbar-track{background:rgba(193,255,229,.08)}
+    .certificate-description::-webkit-scrollbar-thumb{background:#70f5c1;border-radius:8px}
+    .certificate-description::-webkit-scrollbar-thumb:hover{background:#9affd7}
+    .certificate-lightbox{position:fixed;inset:0;z-index:9999;display:none;place-items:center;padding:20px;background:rgba(0,8,8,.92);backdrop-filter:blur(8px)}
+    .certificate-lightbox.is-open{display:grid}
+    .certificate-lightbox-panel{position:relative;width:min(1200px,96vw);max-height:94vh;overflow:auto;border:1px solid rgba(112,245,193,.4);background:#081111;color:#eef4f2;box-shadow:0 30px 100px rgba(0,0,0,.65)}
+    .certificate-lightbox-header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;padding:16px 18px;border-bottom:1px solid rgba(193,255,229,.14)}
+    .certificate-lightbox-header h2{margin:0;font-size:1.1rem}
+    .certificate-lightbox-close{flex:0 0 auto;width:42px;height:42px;border:1px solid rgba(193,255,229,.18);background:#101d1c;color:#eef4f2;font-size:1.4rem;line-height:1}
+    .certificate-lightbox-close:hover,.certificate-lightbox-close:focus{border-color:#70f5c1;color:#70f5c1}
+    .certificate-lightbox-body{padding:12px}
+    .certificate-lightbox-image{display:block;width:100%;max-height:calc(94vh - 180px);object-fit:contain;background:#050a0a}
+    .certificate-lightbox-pdf{display:none;width:100%;height:calc(94vh - 190px);min-height:520px;border:0;background:#fff}
+    .certificate-lightbox-description{margin:0;padding:14px 18px;border-top:1px solid rgba(193,255,229,.14);color:#94a3a2;font-size:.85rem;line-height:1.65}
+    .certificate-lightbox-open{display:inline-flex;align-items:center;gap:.4rem;margin-top:.65rem;color:#70f5c1;font-size:.75rem}
+    .certificate-lightbox-open:hover{color:#a0ffdc}
+    body.lightbox-open{overflow:hidden}
+    @media(max-width:575px){.certificate-lightbox{padding:8px}.certificate-lightbox-panel{width:100%;max-height:97vh}.certificate-lightbox-pdf{height:72vh;min-height:420px}}
+  </style>
+</head>
+<body>
+  <div id="site-nav"></div>
+  <main class="container page-space">
+    <header class="page-intro"><span>04</span><div><p class="eyebrow">Continuous learning</p><h1>Certificates</h1><p>A dedicated credential wall for verified coursework, specializations, and technical training.</p></div></header>
+    <div class="row g-3" id="certificate-list"></div>
+    <p class="content-note">Click any certificate image to view the full-size credential.</p>
+  </main>
+
+  <div class="certificate-lightbox" id="certificateLightbox" role="dialog" aria-modal="true" aria-labelledby="certificateLightboxTitle" aria-hidden="true">
+    <div class="certificate-lightbox-panel" role="document">
+      <div class="certificate-lightbox-header">
+        <div>
+          <p class="certificate-meta mb-1" id="certificateLightboxMeta"></p>
+          <h2 id="certificateLightboxTitle">Certificate</h2>
+        </div>
+        <button class="certificate-lightbox-close" id="certificateLightboxClose" type="button" aria-label="Close certificate viewer">
+          <i class="bi bi-x-lg" aria-hidden="true"></i>
+        </button>
+      </div>
+      <div class="certificate-lightbox-body">
+        <img class="certificate-lightbox-image" id="certificateLightboxImage" src="" alt="">
+        <iframe class="certificate-lightbox-pdf" id="certificateLightboxPdf" src="" title="Certificate PDF"></iframe>
+      </div>
+      <div class="certificate-lightbox-description">
+        <p class="mb-0" id="certificateLightboxDescription"></p>
+        <a class="certificate-lightbox-open" id="certificateLightboxOpen" href="" target="_blank" rel="noopener">
+          Open original file in a new tab <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div id="site-footer"></div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script><script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("certificate-list");
+
+      /*
+       * EDIT YOUR CERTIFICATES HERE.
+       * Put image or PDF files inside: assets/certificates/
+       * Supported examples: certificate-01.jpg or certificate-01.pdf
+       */
+      const certificateData = [
+        {
+          title: "International Group Third Prize – Huawei Cup AI Innovation Competition",
+          issuer: "CHINA POSTGRADUATE AI INNOVATION COMPETITION",
+          date: "2025",
+          file: "assets/certificates/certificate-04.jpg",
+          description: "SafeAging AI delivers intelligent elderly safety through multi-sensor health monitoring and AI. The system tracks vital signs including heart rate, SpO2, ECG intervals, and respiratory patterns. Using Isolation Forest algorithms, it detects real-time anomalies and triggers automated emergency protocols. Integrated smart home features monitor environmental safety through motion detection and appliance monitoring. A web dashboard enables remote caregiver access with detailed health reports and trend analysis. Featuring EHR integration via RESTful APIs and enterprise security with role-based authentication, the platform reduces fall risks, enables early health issue detection, and lowers healthcare costs through preventive monitoring."
+        },
+        {
+          title: "Software Engineer Experience Certificate",
+          issuer: "1 SOCIAL MEDIA AGENCY ",
+          date: "2022",
+          file: "assets/certificates/certificate-01.pdf",
+          description: "Recognizes professional service as a Software Engineer at 1 Social Media Agency, demonstrating dedication, resourcefulness, integrity, and a strong sense of responsibility. The certificate highlights dependable performance, independent problem-solving, and a consistent commitment to completing assigned work effectively. It also reflects the ability to manage responsibilities with minimal supervision, collaborate professionally, and contribute reliably to the organization’s technical objectives."
+        },
+        {
+          title: "Junior PHP Developer Experience Certificate",
+          issuer: "CODELABS (PVT.) LTD",
+          date: "2021",
+          file: "assets/certificates/certificate-02.pdf",
+          description: "Recognizes professional experience as a Junior PHP Developer at CodeLabs (Pvt.) Ltd, with a focus on developing web applications using PHP and the Laravel framework. It highlights strong technical capabilities, a result-oriented approach, dependable performance, and a professional commitment to delivering effective software solutions."
+        },
+        {
+          title: "Software Development Training Certificate",
+          issuer: "HIDAYA INSTITUTE OF SCIENCE & TECHNOLOGY",
+          date: "2019",
+          file: "assets/certificates/certificate-03.pdf",
+          description: "Completed comprehensive software-development training focused on web application development using PHP and MySQL. The program covered HTML5, CSS3, JavaScript, AJAX, object-oriented programming, database modeling and design, template development, and practical software-development skills."
+        },
+        {
+          title: "100 Days of Code: The Complete Python Pro Bootcamp",
+          issuer: "UDEMY",
+          date: "2026",
+          file: "assets/certificates/certificate-11.pdf",
+          description: "Completed comprehensive Python training covering programming fundamentals, object-oriented programming, automation, APIs, web scraping, databases, GUI applications, and data analysis. This credential demonstrates practical Python problem-solving skills and the ability to build complete applications through project-based learning."
+        },
+        {
+          title: "Python (Basic) Skill Certification",
+          issuer: "HACKERRANK",
+          date: "2023",
+          file: "assets/certificates/certificate-05.pdf",
+          description: "Validates foundational Python programming skills through HackerRank’s technical assessment, covering data types, operators, control flow, functions, collections, and problem-solving. This credential demonstrates the ability to write clear Python code and apply core programming concepts to practical tasks."
+        },
+        {
+          title: "Problem Solving (Basic) Skill Certification",
+          issuer: "HACKERRANK",
+          date: "2023",
+          file: "assets/certificates/certificate-06.pdf",
+          description: "Validates foundational problem-solving ability through HackerRank’s technical assessment, covering data structures, algorithms, conditional logic, iteration, and analytical thinking. This credential demonstrates the ability to understand programming challenges and develop clear, efficient solutions."
+        },
+        {
+          title: "Java (Basic) Skill Certification",
+          issuer: "HACKERRANK",
+          date: "2026",
+          file: "assets/certificates/certificate-07.pdf",
+          description: "Validates foundational Java programming skills through HackerRank’s technical assessment, covering syntax, data types, control flow, methods, collections, and object-oriented programming. This credential demonstrates the ability to write structured Java code and apply core concepts to practical programming problems."
+        },
+        {
+          title: "Communication and Soft Skills Training",
+          issuer: "DIGISKILLS",
+          date: "2023",
+          file: "assets/certificates/certificate-08.pdf",
+          description: "Completed professional training in communication and workplace effectiveness, covering interpersonal communication, teamwork, professional etiquette, presentation skills, time management, and personal development. This credential demonstrates the ability to communicate confidently, collaborate effectively, and perform professionally in diverse work environments."
+        },
+        {
+          title: "E-Commerce Management Training",
+          issuer: "DIGISKILLS",
+          date: "2024",
+          file: "assets/certificates/certificate-09.pdf",
+          description: "Completed professional training in e-commerce operations, covering online business models, product selection, digital storefront management, order processing, customer service, and online marketing fundamentals. This credential demonstrates the ability to understand and support essential workflows involved in managing an online business."
+        },
+        {
+          title: "Chinese Proficiency Test – HSK Level 3",
+          issuer: "CENTER FOR LANGUAGE EDUCATION AND COOPERATION",
+          date: "2026",
+          file: "assets/certificates/certificate-10.pdf",
+          description: "Achieved a total score of 244/300 in the HSK Level 3 Chinese Proficiency Test, demonstrating developing proficiency in Mandarin listening, reading, and writing. This credential reflects the ability to understand and use Chinese in everyday academic, professional, and social situations."
+        }
+      ];
+
+      function isPdfFile(file) {
+        return file.split("?")[0].split("#")[0].toLowerCase().endsWith(".pdf");
+      }
+
+      container.innerHTML = certificateData.map(function (certificate, index) {
+        const number = String(index + 1).padStart(2, "0");
+        const isPdf = isPdfFile(certificate.file);
+        const preview = isPdf
+          ? '<span class="certificate-pdf-preview"><i class="bi bi-file-earmark-pdf"></i><strong>PDF Certificate</strong><small>Click to view full document</small></span>'
+          : '<img src="' + certificate.file + '" alt="' + certificate.title + ' certificate" loading="lazy">' +
+            '<span class="certificate-image-fallback"><span><i class="bi bi-award"></i><small>Add ' + certificate.file + '</small></span></span>';
+        return '<div class="col-md-6 col-lg-4 certificate-item">' +
+          '<article class="certificate-entry">' +
+            '<button class="certificate-preview" type="button" data-certificate-index="' + index + '" aria-label="View ' + certificate.title + ' full size">' +
+              preview +
+              '<span class="certificate-zoom" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>' +
+            '</button>' +
+            '<div class="certificate-copy">' +
+              '<p class="certificate-meta">Credential ' + number + ' · ' + certificate.issuer + ' · ' + certificate.date + '</p>' +
+              '<h2>' + certificate.title + '</h2>' +
+              '<p class="certificate-description">' + certificate.description + '</p>' +
+            '</div>' +
+          '</article>' +
+        '</div>';
+      }).join("");
+
+      container.querySelectorAll(".certificate-preview img").forEach(function (image) {
+        image.addEventListener("error", function () {
+          image.closest(".certificate-preview").classList.add("image-missing");
+        });
+      });
+
+      const lightbox = document.getElementById("certificateLightbox");
+      const lightboxPanel = lightbox.querySelector(".certificate-lightbox-panel");
+      const lightboxImage = document.getElementById("certificateLightboxImage");
+      const lightboxPdf = document.getElementById("certificateLightboxPdf");
+      const lightboxTitle = document.getElementById("certificateLightboxTitle");
+      const lightboxMeta = document.getElementById("certificateLightboxMeta");
+      const lightboxDescription = document.getElementById("certificateLightboxDescription");
+      const lightboxOpen = document.getElementById("certificateLightboxOpen");
+      const lightboxClose = document.getElementById("certificateLightboxClose");
+      let lastFocusedElement = null;
+
+      function openLightbox(certificate) {
+        lastFocusedElement = document.activeElement;
+        const isPdf = isPdfFile(certificate.file);
+
+        lightboxImage.style.display = isPdf ? "none" : "block";
+        lightboxPdf.style.display = isPdf ? "block" : "none";
+
+        if (isPdf) {
+          lightboxPdf.src = certificate.file + "#view=FitH&toolbar=1";
+          lightboxImage.src = "";
+        } else {
+          lightboxImage.src = certificate.file;
+          lightboxImage.alt = certificate.title + " certificate";
+          lightboxPdf.src = "";
+        }
+
+        lightboxTitle.textContent = certificate.title;
+        lightboxMeta.textContent = certificate.issuer + " · " + certificate.date;
+        lightboxDescription.textContent = certificate.description;
+        lightboxOpen.href = certificate.file;
+        lightbox.classList.add("is-open");
+        lightbox.setAttribute("aria-hidden", "false");
+        document.body.classList.add("lightbox-open");
+        lightboxClose.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("is-open");
+        lightbox.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("lightbox-open");
+        lightboxImage.src = "";
+        lightboxPdf.src = "";
+        lightboxOpen.href = "";
+        if (lastFocusedElement) lastFocusedElement.focus();
+      }
+
+      container.addEventListener("click", function (event) {
+        const preview = event.target.closest("[data-certificate-index]");
+        if (!preview || preview.classList.contains("image-missing")) return;
+
+        const certificate = certificateData[Number(preview.dataset.certificateIndex)];
+        openLightbox(certificate);
+      });
+
+      lightboxClose.addEventListener("click", closeLightbox);
+
+      lightbox.addEventListener("click", function (event) {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      lightboxPanel.addEventListener("click", function (event) {
+        event.stopPropagation();
+      });
+
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+          closeLightbox();
+        }
+      });
+
+      const itemsPerPage = 6;
+      const items = Array.from(container.children);
+      const totalPages = Math.ceil(items.length / itemsPerPage);
+      if (totalPages <= 1) return;
+
+      let currentPage = 1;
+      const nav = document.createElement("nav");
+      nav.className = "portfolio-pagination mt-5";
+      nav.setAttribute("aria-label", "Certificates pagination");
+      container.insertAdjacentElement("afterend", nav);
+
+      function showPage(page, shouldScroll) {
+        currentPage = page;
+        items.forEach(function (item, index) {
+          const visible = index >= (page - 1) * itemsPerPage && index < page * itemsPerPage;
+          item.classList.toggle("d-none", !visible);
+        });
+
+        nav.innerHTML = '<ul class="pagination justify-content-center flex-wrap gap-1">' +
+          '<li class="page-item ' + (page === 1 ? "disabled" : "") + '"><button class="page-link" data-page="' + (page - 1) + '">Previous</button></li>' +
+          Array.from({ length: totalPages }, function (_, index) {
+            const number = index + 1;
+            return '<li class="page-item ' + (number === page ? "active" : "") + '"><button class="page-link" data-page="' + number + '">' + number + '</button></li>';
+          }).join("") +
+          '<li class="page-item ' + (page === totalPages ? "disabled" : "") + '"><button class="page-link" data-page="' + (page + 1) + '">Next</button></li></ul>';
+
+        if (shouldScroll) container.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+
+      nav.addEventListener("click", function (event) {
+        const button = event.target.closest("[data-page]");
+        if (!button) return;
+        const page = Number(button.dataset.page);
+        if (page >= 1 && page <= totalPages && page !== currentPage) showPage(page, true);
+      });
+
+      showPage(1, false);
+    });
+  </script>
+</body>
+</html>

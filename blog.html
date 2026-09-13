@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Articles and research notes by Manesh Kumar on machine learning, deep learning, data science, and artificial intelligence.">
+  <title>Blog | Manesh Kumar</title>
+
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+
+  <style>
+    .blog-grid > [class*="col-"]{display:flex}
+    .blog-card{width:100%;height:100%;display:flex;flex-direction:column}
+    .blog-image-link{display:block;margin:0!important;outline-offset:3px}
+    .blog-image{height:210px;overflow:hidden;background:#0c1717}
+    .blog-image img{width:100%;height:100%;display:block;object-fit:cover;object-position:center;transition:transform .35s ease,opacity .35s ease}
+    .blog-card:hover .blog-image img{transform:scale(1.035);opacity:.9}
+    .blog-card .card-label{margin-top:1.5rem}
+    .blog-card h2{margin-bottom:1rem}
+    .blog-action{display:inline-flex;align-items:center;gap:.45rem;margin-top:auto!important;color:#70f5c1;font-size:.75rem;font-weight:700;letter-spacing:.04em;text-decoration:none;transition:color .2s ease}
+    .blog-action:hover{color:#fff}
+    .blog-action i{transition:transform .2s ease}
+    .blog-action:hover i{transform:translate(2px,-2px)}
+    .blog-action.is-disabled{color:#718681;pointer-events:none;cursor:default}
+    .portfolio-pagination .page-link{background:#111a1a;border-color:rgba(193,255,229,.14);color:#94a3a2;min-width:42px;text-align:center}
+    .portfolio-pagination .page-link:hover,.portfolio-pagination .page-item.active .page-link{background:#70f5c1;border-color:#70f5c1;color:#071010}
+    .portfolio-pagination .page-item.disabled .page-link{background:#0b1414;border-color:rgba(193,255,229,.08);color:#4f6260}
+  </style>
+</head>
+
+<body>
+  <div id="site-nav"></div>
+
+  <main class="container page-space">
+    <header class="page-intro">
+      <span>03</span>
+      <div>
+        <p class="eyebrow">Ideas &amp; notes</p>
+        <h1>Blog</h1>
+        <p>Clear explanations, research notes, and lessons from studying and building intelligent systems.</p>
+      </div>
+    </header>
+
+    <!-- Add an individual Medium URL inside data-url. Leave it empty for drafts. -->
+    <div class="row g-4 blog-grid" id="blog-list">
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/the-ultimate-guide-to-gradient-descent-the-engine-of-machine-learning-97db485dc2eb">
+          <div class="blog-image"><img src="assets/blog/blog-01.jpg" alt="Gradient Descent article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Machine Learning · Optimization</p>
+          <h2>The Ultimate Guide to Gradient Descent: The Engine of Machine Learning</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/the-ultimate-guide-to-gradient-descent-the-engine-of-machine-learning-97db485dc2eb">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/ensemble-techniques-in-machine-learning-the-power-of-many-models-f355ad8cd6c8?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/ensemble.jpg" alt="LSTM and GRU article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">MACHINE LEARNING · ENSEMBLE LEARNING</p>
+          <h2>Ensemble Techniques in Machine Learning: The Power of Many Models</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/ensemble-techniques-in-machine-learning-the-power-of-many-models-f355ad8cd6c8?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/understanding-convolutional-neural-networks-cnns-a-complete-guide-d0dee9e61dd0?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/blog-02.jpg" alt="LSTM and GRU article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Neural Networks · CNNs</p>
+          <h2>Understanding Convolutional Neural Networks (CNNs)</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/understanding-convolutional-neural-networks-cnns-a-complete-guide-d0dee9e61dd0?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/the-confusion-matrix-dd468dc386ad?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/blog-03.jpg" alt="Machine-learning workflow article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Machine Learning</p>
+          <h2>The Confusion Matrix</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/the-confusion-matrix-dd468dc386ad?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/recurrent-neural-networks-rnn-a-complete-guide-to-sequential-data-processing-f96a6141115e?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/blog-04.jpg" alt="Transformers article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Deep Learning (RNN)</p>
+          <h2>Recurrent Neural Networks (RNN): A Complete Guide to Sequential Data Processing</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/recurrent-neural-networks-rnn-a-complete-guide-to-sequential-data-processing-f96a6141115e?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/understanding-transformers-the-core-engine-behind-modern-ai-d21deecfed02?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/blog-05.jpg" alt="Recurrent neural networks article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Understanding Transformers: DL</p>
+          <h2>Understanding Transformers: The Core Engine Behind Modern AI</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/understanding-transformers-the-core-engine-behind-modern-ai-d21deecfed02?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/beyond-the-average-how-data-tells-its-real-story-5246df7009d0?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/blog-06.jpg" alt="Data-to-model article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Data Science · Statistics</p>
+          <h2>Beyond the Average: How Data Tells Its Real Story</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/beyond-the-average-how-data-tells-its-real-story-5246df7009d0?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="https://medium.com/@munnyvalasai5/when-machines-learned-to-listen-3c2eafa9713d?sharedUserId=munnyvalasai5">
+          <div class="blog-image"><img src="assets/blog/blog-07.jpg" alt="Transformer architecture article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Deep Learning · NLP</p>
+          <h2>A Beginner’s Journey into Natural Language Processing</h2>
+          <a class="blog-action" href="https://medium.com/@munnyvalasai5/when-machines-learned-to-listen-3c2eafa9713d?sharedUserId=munnyvalasai5">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="">
+          <div class="blog-image"><img src="assets/blog/blog-08.jpg" alt="LSTM versus GRU article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Neural Networks · Draft</p>
+          <h2>LSTM vs GRU: Choosing the Right Architecture</h2>
+          <a class="blog-action" href="#">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+
+      <div class="col-md-6 col-lg-4">
+        <article class="content-card blog-card" data-url="">
+          <div class="blog-image"><img src="assets/blog/blog-09.jpg" alt="Applied machine-learning article cover" width="800" height="450" loading="lazy"></div>
+          <p class="card-label">Applied Machine Learning · Draft</p>
+          <h2>Turning Machine-Learning Research into Useful Solutions</h2>
+          <a class="blog-action" href="#">Read on Medium <i class="bi bi-arrow-up-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </main>
+
+  <div id="site-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const container = document.getElementById("blog-list");
+      if (!container) return;
+
+      container.querySelectorAll(".blog-card").forEach(function (card) {
+        const articleUrl = card.dataset.url.trim();
+        const image = card.querySelector(".blog-image");
+        const action = card.querySelector(".blog-action");
+
+        if (!articleUrl) {
+          action.classList.add("is-disabled");
+          action.removeAttribute("href");
+          action.removeAttribute("target");
+          action.innerHTML = 'Article coming soon <i class="bi bi-clock"></i>';
+          return;
+        }
+
+        action.href = articleUrl;
+        action.target = "_blank";
+        action.rel = "noopener noreferrer";
+
+        const imageLink = document.createElement("a");
+        imageLink.className = "blog-image-link";
+        imageLink.href = articleUrl;
+        imageLink.target = "_blank";
+        imageLink.rel = "noopener noreferrer";
+        imageLink.setAttribute("aria-label", "Read " + card.querySelector("h2").textContent + " on Medium");
+        image.parentNode.insertBefore(imageLink, image);
+        imageLink.appendChild(image);
+      });
+
+      const itemsPerPage = 6;
+      const items = Array.from(container.children);
+      const totalPages = Math.ceil(items.length / itemsPerPage);
+      if (totalPages <= 1) return;
+
+      let currentPage = 1;
+      const nav = document.createElement("nav");
+      nav.className = "portfolio-pagination mt-5";
+      nav.setAttribute("aria-label", "Blog pagination");
+      container.insertAdjacentElement("afterend", nav);
+
+      function showPage(page, shouldScroll) {
+        currentPage = page;
+        items.forEach(function (item, index) {
+          const firstIndex = (page - 1) * itemsPerPage;
+          item.classList.toggle("d-none", index < firstIndex || index >= firstIndex + itemsPerPage);
+        });
+
+        nav.innerHTML = '<ul class="pagination justify-content-center flex-wrap gap-1">' +
+          '<li class="page-item ' + (page === 1 ? "disabled" : "") + '"><button class="page-link" type="button" data-page="' + (page - 1) + '">Previous</button></li>' +
+          Array.from({length: totalPages}, function (_, index) {
+            const number = index + 1;
+            return '<li class="page-item ' + (number === page ? "active" : "") + '"><button class="page-link" type="button" data-page="' + number + '">' + number + '</button></li>';
+          }).join("") +
+          '<li class="page-item ' + (page === totalPages ? "disabled" : "") + '"><button class="page-link" type="button" data-page="' + (page + 1) + '">Next</button></li></ul>';
+
+        if (shouldScroll) container.scrollIntoView({behavior:"smooth",block:"start"});
+      }
+
+      nav.addEventListener("click", function (event) {
+        const button = event.target.closest("[data-page]");
+        if (!button) return;
+        const page = Number(button.dataset.page);
+        if (page >= 1 && page <= totalPages && page !== currentPage) showPage(page, true);
+      });
+
+      showPage(1, false);
+    });
+  </script>
+</body>
+</html>

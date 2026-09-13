@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <path fill="#70f5c1" d="M8 4h40l8 8v40l-8 8H8z"/>
+  <text x="32" y="39"
+        text-anchor="middle"
+        fill="#061512"
+        font-family="Arial, Helvetica, sans-serif"
+        font-size="22"
+        font-weight="800"
+        letter-spacing="3">MK</text>
+</svg>
